@@ -1,6 +1,4 @@
-import { Filters } from "@/lib/ui/Filters";
 import PokemonList from "@/lib/ui/PokemonList";
-import { Searchbar } from "@/lib/ui/Searchbar";
 import QueryProvider from "@/lib/utils/queryProvidor";
 
 export default function Home() {
