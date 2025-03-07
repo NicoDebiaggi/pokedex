@@ -8,8 +8,25 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--montserrat-sans);
+  --color-water: #5090d6;
+  --color-dragon: #0b6dc3;
+  --color-electric: #f4d23c;
+  --color-fairy: #ec8fe6;
+  --color-ghost: #5269ad;
+  --color-fire: #ff9d55;
+  --color-ice: #73cec0;
+  --color-grass: #63bc5a;
+  --color-bug: #91c12f;
+  --color-fighting: #ce416b;
+  --color-normal: #919aa2;
+  --color-dark: #5a5465;
+  --color-steel: #5a8ea2;
+  --color-rock: #c5b78c;
+  --color-psychic: #fa7179;
+  --color-ground: #d97845;
+  --color-poison: #b567ce;
+  --color-flying: #89aae3;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +34,10 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+.pixelated {
+  image-rendering: pixelated;
 }
 
 body {
