@@ -22,7 +22,9 @@ export const TypeTag = ({
       <div className="size-5 flex items-center justify-center bg-white rounded-full p-1">
         <Icon type={pokemonType} className="size-full" />
       </div>
-      {showText && pokemonType.type.name}
+      {showText && (
+        <span className="pr-1 text-white">{pokemonType.type.name}</span>
+      )}
     </span>
   );
 };

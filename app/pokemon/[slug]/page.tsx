@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { pokeApi } from "@/lib/api/pokeApi";
 import { twMerge } from "tailwind-merge";
-import { Icon } from "../../../lib/ui/typeIcon";
-import { getTypeColor } from "../../../lib/utils/color";
-import { TypeTag } from "../../../lib/ui/TypeTag";
+import { Icon } from "@/lib/ui/typeIcon";
+import { getTypeColor } from "@/lib/utils/color";
+import { TypeTag } from "@/lib/ui/TypeTag";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { HeaderImage } from "@/lib/ui/HeaderImage";
+import { StatBar } from "@/lib/ui/StatBar";
 
 export default async function PokemonDetails({
   params,
@@ -58,7 +60,7 @@ export default async function PokemonDetails({
           </svg>
         </Link>
         <div className="flex items-center justify-center z-30">
-          <img
+          <HeaderImage
             src={
               pokemon.sprites.other?.["official-artwork"]?.front_default ||
               pokemon.sprites.other?.["dream_world"]?.front_default ||
@@ -67,7 +69,6 @@ export default async function PokemonDetails({
               "/placeholder-pokemon.png"
             }
             alt={pokemon.name}
-            className="w-60 h-60 object-contain"
           />
         </div>
       </div>
@@ -102,23 +103,13 @@ export default async function PokemonDetails({
           {/* Stats */}
           <div>
             <h2 className="text-xl font-bold mb-2 text-gray-700">Base Stats</h2>
-            {pokemon.stats.map((stat) => (
-              <div key={stat.stat.name} className="mb-2">
-                <div className="flex justify-between text-gray-700">
-                  <span className="capitalize">
-                    {stat.stat.name.replace("-", " ")}
-                  </span>
-                  <span className="font-bold">{stat.base_stat}</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className={twMerge("h-2 rounded-full", backgroundColor)}
-                    style={{
-                      width: `${Math.min(100, (stat.base_stat / 255) * 100)}%`,
-                    }}
-                  />
-                </div>
-              </div>
+            {pokemon.stats.map((stat, i) => (
+              <StatBar
+                key={stat.stat.name}
+                stat={stat}
+                color={backgroundColor}
+                delay={i * 0.15}
+              />
             ))}
           </div>
 
