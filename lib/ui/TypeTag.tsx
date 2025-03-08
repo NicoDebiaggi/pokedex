@@ -5,22 +5,24 @@ import { Icon } from "./typeIcon";
 
 export const TypeTag = ({
   pokemonType,
+  showText = true,
 }: {
   pokemonType: pokemonTypes.PokemonType;
+  showText?: boolean;
 }) => {
   const darkColor = getTypeColor(pokemonType.type.name);
 
   return (
     <span
       className={twMerge(
-        "px-2 py-1 rounded-full text-sm font-semibold capitalize flex items-center gap-1",
+        "px-1 py-1 rounded-full text-sm font-semibold capitalize flex items-center gap-1",
         darkColor
       )}
     >
       <div className="size-5 flex items-center justify-center bg-white rounded-full p-1">
         <Icon type={pokemonType} className="size-full" />
       </div>
-      {pokemonType.type.name}
+      {showText && pokemonType.type.name}
     </span>
   );
 };

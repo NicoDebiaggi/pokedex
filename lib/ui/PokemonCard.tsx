@@ -21,7 +21,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   return (
     <div
       className={twMerge(
-        "flex items-center justify-between w-full rounded-xl shadow-md h-28",
+        "flex items-center justify-between w-full rounded-xl shadow-md h-28 max-w-screen overflow-hidden",
         lightColor
       )}
       onClick={() => router.push(`/pokemon/${pokemon.name}`)}
@@ -31,17 +31,22 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
         <p className="text-gray-800 text-sm font-semibold">
           N°{pokemon.id.toString().padStart(3, "0")}
         </p>
-        <h2 className="text-xl font-bold capitalize text-gray-800">
+        <h2 className="text-[5vw] font-bold capitalize text-gray-800">
           {pokemon.name}
         </h2>
 
         {/* Types */}
-        <div className="flex gap-2 mt-2">
+        <div className="flex gap-2 mt-2 flex-wrap">
           {pokemon.types.map((typeInfo) => (
-            <TypeTag key={typeInfo.slot} pokemonType={typeInfo} />
+            <TypeTag
+              key={typeInfo.slot}
+              pokemonType={typeInfo}
+              showText={false}
+            />
           ))}
         </div>
       </div>
+
       {/* Pokémon Image */}
       <div
         className={twMerge(
