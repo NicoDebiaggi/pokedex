@@ -7,12 +7,13 @@ import { TypeTag } from "../../../lib/ui/TypeTag";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-interface PokemonDetailsProps {
-  params: { slug: string };
-}
-
-export default async function PokemonDetails({ params }: PokemonDetailsProps) {
-  const pokemon = await pokeApi.getPokemon(params.slug);
+export default async function PokemonDetails({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const pokemon = await pokeApi.getPokemon(slug);
   const pokemonSpecies = await pokeApi.getPokemonSpecies(pokemon.species.name);
 
   if (!pokemon) {
