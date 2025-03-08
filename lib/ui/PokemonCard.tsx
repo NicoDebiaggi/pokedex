@@ -31,7 +31,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
         <p className="text-gray-800 text-sm font-semibold">
           N°{pokemon.id.toString().padStart(3, "0")}
         </p>
-        <h2 className="text-[5vw] font-bold capitalize text-gray-800">
+        <h2 className="text-[5vw] md:text-xl font-bold capitalize text-gray-800">
           {pokemon.name}
         </h2>
 
