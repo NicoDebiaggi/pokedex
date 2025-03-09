@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/lib/ui/Navbar";
+import Navbar from "@/lib/ui/components/Navbar";
 
 const monserratSans = Montserrat({
   variable: "--montserrat-sans",
@@ -15,8 +15,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -24,6 +26,8 @@ export default function RootLayout({
         className={`${monserratSans.variable} flex flex-col min-h-screend max-w-md mx-auto`}
       >
         {children}
+        {modal}
+        <div id="modal-root" />
         <Navbar />
       </body>
     </html>

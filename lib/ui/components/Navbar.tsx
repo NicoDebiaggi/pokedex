@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Share } from "lucide-react";
-import ModalWithQR from "./ModalWithQR";
+import ModalWithQR from "@/lib/ui/components/ModalWithQR";
 import { useState } from "react";
 
 export default function Navbar() {

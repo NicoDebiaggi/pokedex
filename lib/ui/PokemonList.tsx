@@ -2,7 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import PokemonCard from "./PokemonCard";
+import PokemonCard from "./components/PokemonCard";
 import { pokeApi } from "../api/pokeApi";
 
 export default function PokemonList() {
@@ -12,6 +12,7 @@ export default function PokemonList() {
       queryFn: ({ pageParam = 0 }) => pokeApi.getPokemons({ page: pageParam }),
       initialPageParam: 0,
       getNextPageParam: (_, allPages) => allPages.length * 20,
+      staleTime: 1000 * 60 * 10, // Keep data fresh for 10 minutes
     });
 
   const { ref } = useInView({

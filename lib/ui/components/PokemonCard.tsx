@@ -4,7 +4,7 @@
 import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "./typeIcon";
-import { getTypeColor } from "../utils/color";
+import { getTypeColor } from "../../utils/color";
 import { TypeTag } from "./TypeTag";
 import { PokeAPI as pokemonTypes } from "pokeapi-types";
 import { useRouter } from "next/navigation";

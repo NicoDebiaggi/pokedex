@@ -1,5 +1,5 @@
 import { PokeAPI as pokemonTypes } from "pokeapi-types";
-import { getTypeColor } from "../utils/color";
+import { getTypeColor } from "../../utils/color";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "./typeIcon";
 

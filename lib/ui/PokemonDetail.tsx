@@ -1,30 +1,24 @@
-/* eslint-disable @next/next/no-img-element */
-import { pokeApi } from "@/lib/api/pokeApi";
+import { PokeAPI as PokemonTypes } from "pokeapi-types";
 import { twMerge } from "tailwind-merge";
-import { Icon } from "@/lib/ui/typeIcon";
-import { getTypeColor } from "@/lib/utils/color";
-import { TypeTag } from "@/lib/ui/TypeTag";
+import { Icon } from "./components/typeIcon";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { HeaderImage } from "@/lib/ui/HeaderImage";
-import { StatBar } from "@/lib/ui/StatBar";
+import { HeaderImage } from "./components/HeaderImage";
+import { TypeTag } from "./components/TypeTag";
+import { StatBar } from "./components/StatBar";
 
-export default async function PokemonDetails({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const pokemon = await pokeApi.getPokemon(slug);
-  const pokemonSpecies = await pokeApi.getPokemonSpecies(pokemon.species.name);
+interface PokemonDetailProps {
+  pokemon: PokemonTypes.Pokemon;
+  pokemonSpecies: PokemonTypes.PokemonSpecies;
+  backgroundColor: string;
+  onDismiss?: () => void;
+}
 
-  if (!pokemon) {
-    return notFound();
-  }
-
-  const mainType = pokemon.types[0].type.name as keyof typeof getTypeColor;
-  const backgroundColor = getTypeColor(mainType);
-
+export default function PokemonDetail({
+  pokemon,
+  pokemonSpecies,
+  backgroundColor,
+  onDismiss,
+}: PokemonDetailProps) {
   return (
     <div className="bg-white overflow-hidden flex flex-col items-center justify-start min-h-screen mb-16">
       <div className="w-full h-80 flex items-end justify-center relative">
@@ -39,26 +33,50 @@ export default async function PokemonDetails({
           fillColor="url(#gradient)"
           className="absolute size-60 z-20 bottom-16"
         />
-        <Link
-          href="/"
-          className="absolute top-4 left-4 z-40 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-100 transition-all"
-          aria-label="Go back"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-gray-800"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        {/* Back button */}
+        {onDismiss ? (
+          <button
+            onClick={onDismiss}
+            className="absolute top-4 left-4 z-40 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-100 transition-all"
+            aria-label="Go back"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+        ) : (
+          <Link
+            href="/"
+            className="absolute top-4 left-4 z-40 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-100 transition-all"
+            aria-label="Go back"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </Link>
+        )}
         <div className="flex items-center justify-center z-30">
           <HeaderImage
             src={
